@@ -6,11 +6,11 @@
                 >{{ post.title }}</NuxtLink>
         </h3>
         <div class="flex items-center space-x-2 text-gray-700 post-meta">
-            <div>{{ post.created_at }}</div>
+            <div>{{ format(new Date(post.created_at), 'MMMM dd, yyyy') }}</div>
             <div>&middot;</div>
             <div>{{ post.user.name }}</div>
         </div>
-        <div class="mt-4 leading-relaxed post-preview">
+        <div class="mt-4 leading-relaxed post-preview line-clamp-3">
             {{ post.body }}
         </div>
 
@@ -24,6 +24,8 @@
 </template>
 
 <script setup>
+import {format} from 'date-fns'
+
 const props = defineProps({
     post: Object,
 })

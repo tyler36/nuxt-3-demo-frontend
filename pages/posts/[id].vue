@@ -1,25 +1,27 @@
 <template>
     <div class="container w-1/2 py-8 mx-auto">
-        <Title>{{ $route.params.id }} | {{ title }}</Title>
+        <Title>{{ post.title }} | {{ title }}</Title>
         <h3 class="text-3xl font-bold">
-            <NuxtLink :to="`/posts/1`">Title of Post</NuxtLink>
+            <NuxtLink
+                :to="`/posts/${post.id}`"
+                >{{ post.title }}</NuxtLink>
         </h3>
         <div class="flex items-center space-x-2 text-gray-700 post-meta">
-            <div>Feb 2, 2022</div>
+            <div>{{ format(new Date(post.created_at), 'MMMM dd, yyyy') }}</div>
             <div>&middot;</div>
-            <div>Dave Lister</div>
+            <div>{{ post.user.name }}</div>
         </div>
-        <div class="mt-4 leading-relaxed post-conten">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim
-            temporibus ipsum nobis dolorum libero optio amet et repellat esse
-            corrupti, non voluptatum ab assumenda vero maxime hic, itaque,
-            voluptas ullam ad necessitatibus illo illum velit debitis culpa?
-            Aperiam, provident itaque. Sequi tempora sunt ex temporibus. Aperiam
-            reprehenderit repellendus deserunt nihil.
+        <div class="mt-4 leading-relaxed post-preview">
+            {{ post.body }}
         </div>
     </div>
 </template>
 
 <script setup>
+    import {format} from 'date-fns'
+
     const title = useState('title')
+    const route = useRoute()
+
+    const post = await useNuxtApp().$apiFetch(`/api/posts/${route.params.id}`)
 </script>
