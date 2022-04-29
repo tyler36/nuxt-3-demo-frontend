@@ -8,20 +8,13 @@
         </div>
         <div>
           <ul class="flex space-x-12">
-            <li>
-              <NuxtLink to="/">Home</NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/about">About</NuxtLink>
-            </li>
-            <li>
-              <NuxtLink to="/contact">Contact</NuxtLink>
-            </li>
+            <li><NuxtLink to="/" append>Home</NuxtLink></li>
+            <li><NuxtLink to="/about" append>About</NuxtLink></li>
+            <li><NuxtLink to="/contact" append>Contact</NuxtLink></li>
           </ul>
         </div>
       </div>
     </nav>
-
     <slot />
   </div>
 </template>
@@ -32,6 +25,6 @@ const title = useState('title', () => 'Nuxt 3 Blog')
 
 <style>
 .router-link-active {
-  @apply font-bold;
+  font-weight: bold;
 }
 </style>
